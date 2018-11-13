@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "709580879627",
+    "firebase_url": "https://fir-loginv20kotlin-14986.firebaseio.com",
+    "project_id": "fir-loginv20kotlin-14986",
+    "storage_bucket": "fir-loginv20kotlin-14986.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709580879627:android:8b137ce86107393d",
+        "android_client_info": {
+          "package_name": "com.example.edidi.firebaseloginv20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709580879627-oepmoi1ou8h2ldggos6n6u591th9hmfm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edidi.firebaseloginv20",
+            "certificate_hash": "f3a1f7675bef1f67f062fcf5563630abd1a0b09d"
+          }
+        },
+        {
+          "client_id": "709580879627-cp3bjvnmpk189jg34k47srmsibs87e4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsgMs0eb7mNeACZwWiHNandDt5ZCXCWTk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709580879627-cp3bjvnmpk189jg34k47srmsibs87e4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
