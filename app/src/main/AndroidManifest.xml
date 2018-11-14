@@ -7,41 +7,36 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="firebaseloginv20"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".LoginActivity">
-            //code for starting first
+          <activity android:name=".MainActivity"> </activity>//MainActivity
+        <activity android:name=".LoginActivity" >
+
+
+
+        </activity>//LoginActivity
+
+        <activity android:name=".RegisterActivity" > </activity>//RegisterActivity
+
+        <activity android:name=".FirstSetup" >  </activity>//FirstSetup
+
+       <activity android:name=".SpinnerChoise" >  </activity>//SpinnerChoise
+
+        <activity android:name=".GoogleCalendar"> //firstSetup
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        //firstSetup
-        <activity android:name=".FirstSetup"></activity>
-
-
-        //SpinnerChoise
 
 
 
-        <activity android:name=".SpinnerChoise">
+        </activity>        //Calendar
 
-
-
-
-        </activity>
-
-
-        <activity android:name=".EmailWebView">
-
-
-
-        </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>

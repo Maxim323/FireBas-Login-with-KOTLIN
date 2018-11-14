@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
 
             //mai necesita putina munca!!!! !#!#!!#!@ (TEST IT AND YOU`LL SEE)
             //comentariu block este pus pentru beta testing cu conturi de gmail.
-          /*  if(email.toLowerCase().indexOf(email_personal.toLowerCase()) != -1){
+           /* if(email.toLowerCase().indexOf(email_personal.toLowerCase()) != -1){
                 mProgressLogin.visibility = View.VISIBLE
                 mRegister.visibility = View.INVISIBLE
                 registerUser(email, password)

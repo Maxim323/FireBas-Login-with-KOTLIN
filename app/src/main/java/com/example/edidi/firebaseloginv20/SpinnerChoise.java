@@ -121,7 +121,7 @@ public class SpinnerChoise extends AppCompatActivity  {
         }); //apasand pe buton
 
 
-        }//on create
+    }//on create
 
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -130,7 +130,7 @@ public class SpinnerChoise extends AppCompatActivity  {
 
 
 
-    }//final
+}//final
 
 
 
