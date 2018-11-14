@@ -1,10 +1,8 @@
 package com.example.edidi.firebaseloginv20;
 
-import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,29 +12,27 @@ import android.widget.Toast;
 
 public class GoogleCalendar extends AppCompatActivity {
 
-    private EditText editText;
-    private Button button_copy1;
+    EditText text_linkcalendar;
+    Button copy;
 
-    @SuppressLint("WrongViewCast")
+
+    //still not working, CE NAIBA AIII
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_calendar);
 
-        editText = findViewById(R.id.text_linkcalendar);
-        button_copy1 = findViewById(R.id.button_copy);
-        ///fmmmmmmmmmmmmm
-        //nu stiu de ce iti da crash la aplciatie...totul pare corect
-        button_copy1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("text", editText.getText().toString());
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(GoogleCalendar.this, "TextCopied", Toast.LENGTH_SHORT).show();
-            }
+       copy.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+                ClipboardManager Clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("text",text_linkcalendar.getText().toString());
+                Clipboard.setPrimaryClip(clip);
+               Toast.makeText(GoogleCalendar.this, "LinkCopied", Toast.LENGTH_SHORT).show();
+           }
+       });
 
-        });
+
 
     }
     }
