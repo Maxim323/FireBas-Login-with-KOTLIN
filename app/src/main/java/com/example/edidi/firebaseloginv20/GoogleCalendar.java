@@ -25,7 +25,7 @@ public class GoogleCalendar extends AppCompatActivity {
 
         editText = findViewById(R.id.text_linkcalendar);
         button_copy1 = findViewById(R.id.button_copy);
-
+        ///fmmmmmmmmmmmmm
         //nu stiu de ce iti da crash la aplciatie...totul pare corect
         button_copy1.setOnClickListener(new View.OnClickListener() {
             @Override
