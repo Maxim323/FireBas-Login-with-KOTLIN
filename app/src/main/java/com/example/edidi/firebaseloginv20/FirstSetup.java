@@ -26,7 +26,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
 import java.net.URI;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -66,6 +65,8 @@ public class FirstSetup extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(user_name) && mainImageURI != null) {
 
+
+
                         setupProgress.setVisibility(View.VISIBLE);
                         String user_id = firebaseAuth.getCurrentUser().getUid();
                         StorageReference image_path = storageReference.child("profile_pictures").child(user_id + ".jpg");
@@ -73,8 +74,8 @@ public class FirstSetup extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                 if(task.isSuccessful()){
-                                    //AICI DA CRASHH
-                                    Uri download_uri = task.getResult().getUploadSessionUri();
+                                    //AICI DA CRASHH   .getDownloadUrl, care nu apare.
+                                    //Uri download_uri = task.getResult().getDownloadUrl();
                                     Toast.makeText(FirstSetup.this,"The imageisuplouded:", Toast.LENGTH_LONG).show();
                                 }else {
 

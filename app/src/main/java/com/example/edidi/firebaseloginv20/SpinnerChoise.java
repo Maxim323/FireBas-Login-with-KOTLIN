@@ -1,9 +1,15 @@
 package com.example.edidi.firebaseloginv20;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +17,21 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +48,13 @@ public class SpinnerChoise extends AppCompatActivity  {
     private static final String KEY_SPECIALIZARE = "Specializare";
     private static final String KEY_AN = "An";
     private static final String KEY_GRUPA = "Grupa";
-
+    private ImageView mImageView;
     private EditText editTextNume_Prenume;
+    private Button SelectImage;
+    private StorageReference mStorage;
+    private static final int GALLERY_INTENT = 2;
+    private ProgressBar setupProgress;
+
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -43,9 +65,12 @@ public class SpinnerChoise extends AppCompatActivity  {
         setContentView(R.layout.activity_spinner_choise);
 
 
+        mStorage = FirebaseStorage.getInstance().getReference();
+        mImageView = findViewById(R.id.imageView);
+        SelectImage = findViewById(R.id.select_image);
+        setupProgress = findViewById(R.id.progressBar);
         editTextNume_Prenume = findViewById(R.id.edit_text_nume_prenume);
         Button save = findViewById(R.id.save);
-
 
 
         //string`uri pentru autocomplete
@@ -54,6 +79,15 @@ public class SpinnerChoise extends AppCompatActivity  {
         String[] An = getResources().getStringArray(R.array.An);
         String[] Grupa = getResources().getStringArray(R.array.Grupa);
 
+
+        SelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALLERY_INTENT);
+            }
+        });
 
 
 
@@ -80,13 +114,10 @@ public class SpinnerChoise extends AppCompatActivity  {
 
 
 
-
         save.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void onClick(View v) {
-
-
                 String nume_presume = editTextNume_Prenume.getText().toString();
                 final String input_grupa = grupa.getText().toString();
                 final String input_facultate = facultate.getText().toString();
@@ -122,6 +153,33 @@ public class SpinnerChoise extends AppCompatActivity  {
 
 
     }//on create
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        String name = editTextNume_Prenume.getText().toString();
+
+        if(requestCode == GALLERY_INTENT && resultCode== RESULT_OK);
+             setupProgress.setVisibility(View.VISIBLE);
+            final Uri uri = data.getData();
+
+            //Daca dai uploud fara sa scrii nume, da crash. TO BE FIXED.
+            StorageReference filepath = mStorage.child("Profile Photos").child(name);
+            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    mImageView.setImageURI(uri);
+                    Toast.makeText(SpinnerChoise.this, "Done uploading", Toast.LENGTH_SHORT).show();
+                    setupProgress.setProgress(100);
+                    setupProgress.setVisibility(View.INVISIBLE);
+                }
+            });
+
+    }
 
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
