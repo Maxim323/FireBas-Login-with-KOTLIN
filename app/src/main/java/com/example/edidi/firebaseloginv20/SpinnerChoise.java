@@ -35,14 +35,12 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-
-
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class SpinnerChoise extends AppCompatActivity  {
 
+    private static final String KEY_PROFILE_IAMGE_PATH = "Path poza profil: @Profile pictures/";
     private static final String KEY_NUME_PRENUME = "Nume si prenume";
     private static final String KEY_FACULTATE = "Facultate";
     private static final String KEY_SPECIALIZARE = "Specializare";
@@ -54,6 +52,8 @@ public class SpinnerChoise extends AppCompatActivity  {
     private StorageReference mStorage;
     private static final int GALLERY_INTENT = 2;
     private ProgressBar setupProgress;
+    private CircleImageView setupImage;
+    private Uri mainImageURI= null;
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -65,10 +65,12 @@ public class SpinnerChoise extends AppCompatActivity  {
         setContentView(R.layout.activity_spinner_choise);
 
 
+
         mStorage = FirebaseStorage.getInstance().getReference();
         mImageView = findViewById(R.id.imageView);
         SelectImage = findViewById(R.id.select_image);
         setupProgress = findViewById(R.id.progressBar);
+
         editTextNume_Prenume = findViewById(R.id.edit_text_nume_prenume);
         Button save = findViewById(R.id.save);
 
@@ -90,7 +92,7 @@ public class SpinnerChoise extends AppCompatActivity  {
         });
 
 
-
+        //Field-urile de autoComplete
         final  AutoCompleteTextView facultate = findViewById(R.id.facultate);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_expandable_list_item_1, Facultate);
@@ -119,12 +121,14 @@ public class SpinnerChoise extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 String nume_presume = editTextNume_Prenume.getText().toString();
+                String path_image_profile = editTextNume_Prenume.getText().toString();
                 final String input_grupa = grupa.getText().toString();
                 final String input_facultate = facultate.getText().toString();
                 final String input_specializare = specializare.getText().toString();
                 final  String input_an = an.getText().toString();
 
                 Map<String, Object> note = new HashMap<>();
+                note.put(KEY_PROFILE_IAMGE_PATH, path_image_profile);
                 note.put(KEY_NUME_PRENUME, nume_presume);
                 note.put(KEY_FACULTATE, input_facultate);
                 note.put(KEY_SPECIALIZARE, input_specializare);
@@ -156,18 +160,20 @@ public class SpinnerChoise extends AppCompatActivity  {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
+        //incarcare imagine in firebase
         String name = editTextNume_Prenume.getText().toString();
 
-        if(requestCode == GALLERY_INTENT && resultCode== RESULT_OK);
-             setupProgress.setVisibility(View.VISIBLE);
+
+        if(requestCode == GALLERY_INTENT && resultCode== RESULT_OK) {
+            setupProgress.setVisibility(View.VISIBLE);
             final Uri uri = data.getData();
 
             //Daca dai uploud fara sa scrii nume, da crash. TO BE FIXED.
             StorageReference filepath = mStorage.child("Profile Photos").child(name);
+
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -177,7 +183,9 @@ public class SpinnerChoise extends AppCompatActivity  {
                     setupProgress.setProgress(100);
                     setupProgress.setVisibility(View.INVISIBLE);
                 }
+
             });
+        }
 
     }
 

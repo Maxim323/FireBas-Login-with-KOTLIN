@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -56,75 +57,28 @@ public class FirstSetup extends AppCompatActivity {
         setupImage = findViewById(R.id.setup_image);
         setupName = findViewById(R.id.setup_name);
         setupButton = findViewById(R.id.setup_button);
-        setupProgress = findViewById(R.id.setup_progress);
+        setupProgress =findViewById(R.id.progressBar2);
 
-        setupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String user_name = setupName.getText().toString();
-
-                if (!TextUtils.isEmpty(user_name) && mainImageURI != null) {
-
-
-
-                        setupProgress.setVisibility(View.VISIBLE);
-                        String user_id = firebaseAuth.getCurrentUser().getUid();
-                        StorageReference image_path = storageReference.child("profile_pictures").child(user_id + ".jpg");
-                        image_path.putFile(mainImageURI).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    //AICI DA CRASHH   .getDownloadUrl, care nu apare.
-                                    //Uri download_uri = task.getResult().getDownloadUrl();
-                                    Toast.makeText(FirstSetup.this,"The imageisuplouded:", Toast.LENGTH_LONG).show();
-                                }else {
-
-                                    String error = task.getException().getMessage();
-                                    Toast.makeText(FirstSetup.this,"Error:" + error, Toast.LENGTH_LONG).show();
-                                }
-
-                                setupProgress.setVisibility(View.INVISIBLE);
-                            }
-                        });
-
-
-                }
-
-            }
-        });
-
-
+//persmisiuni de citire si scriere pe telefon
         setupImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-
                     if(ContextCompat.checkSelfPermission(FirstSetup.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-
                         Toast.makeText(FirstSetup.this, "Permission Denied", Toast.LENGTH_LONG).show();
                         ActivityCompat.requestPermissions(FirstSetup.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
                     } else {
-
                         CropImage.activity()
                                 .setGuidelines(CropImageView.Guidelines.ON)
                                 .setAspectRatio(1,1)
                                 .start(FirstSetup.this);
-
                     }
-
                 } else {
-
-
+                    Toast.makeText(FirstSetup.this, "Cropping failed, try again.", Toast.LENGTH_SHORT).show();
                 }
-
             }
-
         });
-
-
-
 
 
     }//main function
@@ -133,15 +87,26 @@ public class FirstSetup extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        StorageReference filepath = storageReference.child("Profile photos");
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            setupProgress.setVisibility(View.VISIBLE);
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
 
                 mainImageURI= result.getUri();
                 setupImage.setImageURI(mainImageURI);
 
+                filepath.putFile(mainImageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(FirstSetup.this, "Done uploading", Toast.LENGTH_SHORT).show();
+                        setupProgress.setProgress(100);
+                        setupProgress.setVisibility(View.INVISIBLE);
+                    }
 
+                });
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 
                 Exception error = result.getError();
