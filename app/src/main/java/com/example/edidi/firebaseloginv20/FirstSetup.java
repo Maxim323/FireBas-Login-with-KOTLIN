@@ -55,8 +55,6 @@ public class FirstSetup extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         setupImage = findViewById(R.id.setup_image);
-        setupName = findViewById(R.id.setup_name);
-        setupButton = findViewById(R.id.setup_button);
         setupProgress =findViewById(R.id.progressBar2);
 
 //persmisiuni de citire si scriere pe telefon
@@ -87,7 +85,7 @@ public class FirstSetup extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        StorageReference filepath = storageReference.child("Profile photos");
+        StorageReference filepath = storageReference.child("Profile photos").child("");
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             setupProgress.setVisibility(View.VISIBLE);
@@ -116,7 +114,7 @@ public class FirstSetup extends AppCompatActivity {
 
 
 
-    }
+    }//onactivityresult
 
 
 }

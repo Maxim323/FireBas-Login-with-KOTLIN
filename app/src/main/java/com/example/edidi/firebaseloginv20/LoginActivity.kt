@@ -66,7 +66,8 @@ class LoginActivity : AppCompatActivity() {
                 mLoginPassword.error = "Enter password"
                 return@setOnClickListener
             }
-            checked()
+
+            checked() // <-remember me button
             loginUser(email, password)
         }
 
