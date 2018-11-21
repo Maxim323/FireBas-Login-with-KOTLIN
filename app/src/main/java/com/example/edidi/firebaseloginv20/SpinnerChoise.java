@@ -121,36 +121,19 @@ public class SpinnerChoise extends AppCompatActivity  {
 
 
         save.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+            //@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void onClick(View v) {
+              //O mica eroaree = Daca dai register fara sa completezi niciun camp, da crash. In rest, totul normal.
+                 if(validateFacultate() || validateGrupa() || validateAn() || validateSpecializare() || validateNume_Prenume()){
 
-                if(validateFacultate()){
+                     Toast.makeText(SpinnerChoise.this, "Complete the red fields.", Toast.LENGTH_SHORT).show();
+                }else {
 
-                    SalvareDetaliiCont();
-                }
-                if(validateGrupa()){
-
-                    SalvareDetaliiCont();
-                }
-                if(validateAn()){
-
-                    SalvareDetaliiCont();
-                }
-                if(validateSpecializare()){
-
-                    SalvareDetaliiCont();
-                }
-                if(validateNume_Prenume()){
-
-                    SalvareDetaliiCont();
-                }
-
-                UploudImagine();
-                }
+                     SalvareDetaliiCont();
+                 }
+            }
         }); //apasand pe buton
-
-
     }//on create
 
     private void SalvareDetaliiCont() {
@@ -189,7 +172,7 @@ public class SpinnerChoise extends AppCompatActivity  {
 
                     }
                 });
-
+        UploudImagine();
         openMainActivity();
     }
 
@@ -293,7 +276,7 @@ public class SpinnerChoise extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             setupProgress.setVisibility(View.VISIBLE);
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
