@@ -49,7 +49,7 @@ public class SpinnerChoise extends AppCompatActivity  {
     private StorageReference storageReference;
     private ProgressBar setupProgress;
     private CircleImageView setupImage;
-    private Uri mainImageURI= null;
+    private Uri mainImageURI=null;
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -121,17 +121,31 @@ public class SpinnerChoise extends AppCompatActivity  {
 
 
         save.setOnClickListener(new View.OnClickListener() {
-            //@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void onClick(View v) {
-              //O mica eroaree = Daca dai register fara sa completezi niciun camp, da crash. In rest, totul normal.
-                 if(validateFacultate() || validateGrupa() || validateAn() || validateSpecializare() || validateNume_Prenume()){
+                int i=0;
+              //O mica eroaree = Daca dai register fara poza de prof + nume = crash
+                    if(validateNume_Prenume()){
+                        i++;
 
-                     Toast.makeText(SpinnerChoise.this, "Complete the red fields.", Toast.LENGTH_SHORT).show();
-                }else {
+                    }if(validateFacultate()){
+                        i++;
 
-                     SalvareDetaliiCont();
-                 }
+                    }if(validateSpecializare()){
+                        i++;
+
+                    }if(validateAn()){
+                        i++;
+
+                    }if(validateGrupa()){
+                        i++;
+
+                    }if((validateNume_Prenume() && validateFacultate() && validateSpecializare() && validateAn() && validateGrupa() && i==5 )) {
+                             SalvareDetaliiCont();
+                    }else{
+                    Toast.makeText(SpinnerChoise.this, "Error!", Toast.LENGTH_SHORT).show();
+                    }
             }
         }); //apasand pe buton
     }//on create
@@ -174,9 +188,8 @@ public class SpinnerChoise extends AppCompatActivity  {
                 });
         UploudImagine();
         openMainActivity();
+
     }
-
-
 
 
         public void UploudImagine() {
@@ -191,8 +204,6 @@ public class SpinnerChoise extends AppCompatActivity  {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(SpinnerChoise.this, "Done uploading", Toast.LENGTH_SHORT).show();
-                        setupProgress.setProgress(100);
-                        setupProgress.setVisibility(View.INVISIBLE);
                     }
                 });
             }
@@ -278,7 +289,6 @@ public class SpinnerChoise extends AppCompatActivity  {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            setupProgress.setVisibility(View.VISIBLE);
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
 

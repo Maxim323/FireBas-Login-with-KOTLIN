@@ -13,45 +13,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-          <activity android:name=".MainActivity"> </activity>//MainActivity
+        <activity android:name=".choose_timeline" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+
+        </activity>
+
+
+
+
+        <activity android:name=".MainActivity"></activity>//MainActivity
         <activity android:name=".LoginActivity" >
-
-
-
         </activity>//LoginActivity
-
-        <activity android:name=".RegisterActivity" > </activity>//RegisterActivity
-
+        <activity android:name=".RegisterActivity" >
+        </activity>//RegisterActivity
         <activity android:name=".FirstSetup" >
-
-
-
-
         </activity>//FirstSetup
+        <activity android:name=".SpinnerChoise" >
 
-       <activity android:name=".SpinnerChoise" >
-           <intent-filter>
-               <action android:name="android.intent.action.MAIN" />
-
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-
-
-       </activity>//SpinnerChoise
-
-        <activity android:name=".GoogleCalendar"> //firstSetup
-
-
-        </activity>        //Calendar
-
-
+        </activity>//SpinnerChoise
+        <activity android:name=".GoogleCalendar" >
+ //firstSetup
+        </activity>
+        //Calendar
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
 
 
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
     </application>
+
 </manifest>
