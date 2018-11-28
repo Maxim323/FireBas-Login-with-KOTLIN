@@ -25,16 +25,23 @@
         </activity>
 
 
-
-
         <activity android:name=".MainActivity"></activity>//MainActivity
         <activity android:name=".LoginActivity" >
+
+
+
+
         </activity>//LoginActivity
         <activity android:name=".RegisterActivity" >
         </activity>//RegisterActivity
         <activity android:name=".FirstSetup" >
+
+
+
         </activity>//FirstSetup
         <activity android:name=".SpinnerChoise" >
+
+
 
         </activity>//SpinnerChoise
         <activity android:name=".GoogleCalendar" >
