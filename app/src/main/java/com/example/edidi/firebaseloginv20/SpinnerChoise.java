@@ -61,7 +61,6 @@ public class SpinnerChoise extends AppCompatActivity  {
         setContentView(R.layout.activity_spinner_choise);
 
 
-        setupProgress =findViewById(R.id.progressBar2);
         setupImage = findViewById(R.id.setup_image);
         storageReference = FirebaseStorage.getInstance().getReference();
         mImageView = findViewById(R.id.imageView);
@@ -146,6 +145,8 @@ public class SpinnerChoise extends AppCompatActivity  {
                     }else{
                     Toast.makeText(SpinnerChoise.this, "Error!", Toast.LENGTH_SHORT).show();
                     }
+
+
             }
         }); //apasand pe buton
     }//on create
@@ -187,7 +188,7 @@ public class SpinnerChoise extends AppCompatActivity  {
                     }
                 });
         UploudImagine();
-        openMainActivity();
+        openChooseTimeline();
 
     }
 
@@ -302,8 +303,8 @@ public class SpinnerChoise extends AppCompatActivity  {
 
     }
 
-    public void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void openChooseTimeline() {
+        Intent intent = new Intent(this, choose_timeline.class);
         startActivity(intent);
     }
 }//final

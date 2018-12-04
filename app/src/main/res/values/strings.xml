@@ -32,7 +32,7 @@
     </string-array>
 
     <string-array name="Specializare">
-        <item> - </item>
+        //IESC
         <item> Electrotehnica </item>
         <item> Inginerie electrica si calculatoare (Lb Engleza) </item>
         <item> Electronica aplicata </item>
@@ -41,6 +41,12 @@
         <item> Automatica si Informatica aplicata</item>
         <item> Tehnologia informatii </item>
         <item> Robotica </item>
+
+        DPM
+        <item> Design industrial  </item>
+        <item> Design industrial (Lb Engleza) </item>
+        <item> Ingineria sistemului  </item>
+
     </string-array>
 
     //labaza de data converteste string`uri in int//
