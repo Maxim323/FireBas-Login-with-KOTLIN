@@ -60,7 +60,7 @@
         android:textColor="#1A73E8"
         android:typeface="normal"
         app:fontFamily="@font/brown_pro_standard"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/settings_display_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/settings_display_name"
         android:layout_width="292dp"
         android:layout_height="44dp"
 
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_linkcalendar" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/settings_status"
         android:layout_width="292dp"
         android:layout_height="46dp"
 
@@ -115,7 +115,7 @@
         app:fontFamily="@font/brown_pro_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_display_name" />
 
     <TextView
         android:id="@+id/textView4"
@@ -131,7 +131,7 @@
         app:fontFamily="@font/brown_pro_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_status" />
 
     <TextView
         android:id="@+id/textView5"
@@ -165,7 +165,7 @@
         android:layout_marginRight="96dp"
         android:layout_marginBottom="8dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/settings_display_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView1"
@@ -182,7 +182,7 @@
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/settings_display_name"
         app:layout_constraintEnd_toEndOf="@+id/textView1"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/text_linkcalendar"
